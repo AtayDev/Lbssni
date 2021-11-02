@@ -2,7 +2,8 @@ package org.example.beans;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "feature")
+@Table(name = "feature")
 public class Feature {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

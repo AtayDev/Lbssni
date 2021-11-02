@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "client")
+@Table(name = "client")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,8 +25,10 @@ public class Client {
     @JoinColumn(name = "client_features_id")
     private Feature feature;
 
+
     @OneToMany(mappedBy ="client", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private List<Order> orders;
+
 
     public Client() {
 
@@ -119,5 +122,6 @@ public class Client {
         orders.add(o);
         o.setClient(this);
     }
+
 }
 
