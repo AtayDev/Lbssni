@@ -19,11 +19,13 @@ public class customUserDetailsService implements UserDetailsService {
 
         //Must add all the annotated objects
         //Create the Session Factory
-        SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Client.class)
+        SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Client.class)
                .addAnnotatedClass(Feature.class)
                .addAnnotatedClass(Order.class)
                 .addAnnotatedClass(Product.class)
                 .addAnnotatedClass(OrderLine.class)
+                .addAnnotatedClass(Cart.class)
                 .buildSessionFactory();
 
         //Create A Session Object

@@ -10,6 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Query;
+import java.util.List;
+
 @Service
 public class ServiceClient implements InterfaceClient {
 
@@ -23,6 +26,7 @@ public class ServiceClient implements InterfaceClient {
                 .addAnnotatedClass(Feature.class)
                 .addAnnotatedClass(OrderLine.class)
                 .addAnnotatedClass(Product.class)
+                .addAnnotatedClass(Cart.class)
                 .buildSessionFactory();
 
         //Create A Session Object
@@ -63,6 +67,30 @@ public class ServiceClient implements InterfaceClient {
 
     @Override
     public int getIdByUsername(String username) {
-        return 0;
+        //Create the Session Factory
+        SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Client.class)
+                .addAnnotatedClass(Order.class)
+                .addAnnotatedClass(Feature.class)
+                .addAnnotatedClass(OrderLine.class)
+                .addAnnotatedClass(Product.class)
+                .addAnnotatedClass(Cart.class)
+                .buildSessionFactory();
+        //Create A Session Object
+        Session session=factory.getCurrentSession();
+
+        //Begin Transaction
+        session.beginTransaction();
+
+        //Create Query
+        Query query=session.createQuery("from client c where c.username='"+username+"'",Client.class);
+        List<Client> clients=query.getResultList();
+        int id =clients.get(0).getId();
+
+        //Commit transaction
+        session.getTransaction().commit();
+
+        return id;
+
     }
 }

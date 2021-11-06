@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -47,6 +48,38 @@
 
     .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+
+    .container{
+
+    			margin-top:30px;
+    			margin-bottom:100px;
+                display:flex;
+                flex-direction:row;
+                flex-wrap:wrap;
+                 gap:30px;
+            }
+            .cat{
+                margin:auto;
+                height:200px;
+                width:200px;
+                text-align:center;
+
+
+            }
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.details {
+  padding: 2px 16px;
+}
 	</style>
 </head>
 <%@include file="header-client.jsp" %>
@@ -64,7 +97,7 @@
 	<div class="dropdown">
 	  <button class="dropbtn">By Category</button>
 	  <div class="dropdown-content">
-	    <a href="/client/shirts">Shirts</a>
+	    <a href="#">Shirts</a>
 	    <a href="#">T-shirts</a>
 	    <a href="#">Hoodies</a>
 	    <a href="#">Jeans</a>
@@ -92,7 +125,20 @@
     	  </div>
     	</div>
 </div>
+<div class="container" style="width:700px;">
+	<c:forEach items="${products}" var="element">
+	<div class="card" style="text-align:center;">
+		<img class="cat" style="width:100%;" src="${element.imgUrl}">
+		<div class="details">
+            <h4><b>${element.title}</b></h4>
+            <p>${element.unitPrice} DH</p>
+            <p>Qty: ${element.qtyInStock}</p>
+            <button type="button"  class="btn btn-primary" id="${element.id}"><a href="/products/${element.id}" style="text-decoration:none;color:white;">Add to cart</a></button>
 
+        </div>
+	</div>
+	</c:forEach>
+</div>
 
 
 

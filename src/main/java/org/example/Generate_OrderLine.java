@@ -13,8 +13,8 @@ public class Generate_OrderLine {
         Order o1=new Order("01/01/2021","UNDELIVERED");
         Order o2=new Order("99/99/9999","UNDELIVERED");
 
-        Product p1=new Product("Iphone","made by apple","image_iphone",499.99,50);
-        Product p2=new Product("Samsung","made by samsung","image_samsung",359.99,100);
+        Product p1=new Product();
+        Product p2=new Product();
 
         SessionFactory factory=new Configuration().configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Client.class)
