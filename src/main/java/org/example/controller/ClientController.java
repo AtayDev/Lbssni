@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -42,7 +43,20 @@ public class ClientController {
 
         //Set the cart fields then save it to the DB
         cart.setIdClient(client_id);
+
+        cart.setDate(new Date());
         serviceCart.addToCart(cart);
         return "client/checkout";
+    }
+    @RequestMapping("/cart-client")
+    public String getItemsInCart(HttpServletRequest request, Model model){
+        Principal principal=request.getUserPrincipal();
+        String username=principal.getName();
+        int client_id=serviceClient.getIdByUsername(username);
+
+        List<Cart> items=serviceCart.getItemsInCart(client_id);
+        model.addAttribute("items",items);
+
+        return "client/cart-client";
     }
 }

@@ -63,7 +63,7 @@ public class ServiceProduct implements InterfaceProduct {
             //Begin Transaction
             session.beginTransaction();
 
-            //Save Product
+            //Create a retrieve Product Query
             List<Product> products=session.createQuery("from product p where p.category='"+category+"'",Product.class).getResultList();
 
             //Commit Transaction

@@ -22,13 +22,17 @@ public class Cart {
     @Column(name = "id_product")
     private int idProduct;
 
+    @Column(name = "unit_price")
+    private double unitPrice;
+
     private int quantity;
     private Date date;
 
     public Cart() {
     }
 
-    public Cart(int quantity, Date date) {
+    public Cart(double unitPrice, int quantity, Date date) {
+        this.unitPrice = unitPrice;
         this.quantity = quantity;
         this.date = date;
     }
@@ -71,5 +75,13 @@ public class Cart {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 }
